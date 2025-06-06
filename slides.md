@@ -46,17 +46,22 @@ color: amber-light
 
 <div class="topic-box">
 
-平原さん(NII)との二つの共著論文をマージした内容
+平原 秀一さん(NII)との二つの共著論文をマージした内容
 - Error-Correction of Matrix Multiplication Algorithms (STOC'25)
 - An Optimal Error-Correcting Reduction for Matrix Multiplication (ICALP'25)
 
 </div>
 
+<v-clicks>
+
 - 「行列積に関する単純な問題を**誤り訂正符号**を使って解決した」という論文
-- 評価はとても良かった (STOCとICALPのreviewerの評価はそれぞれ Accept $\times 3$)
+
+- 評価はとても良かった (**STOC**と**ICALP**のreviewerの評価はそれぞれ Accept $\times 3$)
   - Overall I think it's a very nice result with very interesting techniques, and it should be appealing to a broad audience. I recommend accepting the paper.
   - The results in the paper are strong, building upon previously studied questions of worst-case-to-average-case reductions for matrix multiplication.
-- 話の内容: 結果の説明 + 誤り訂正符号の基礎 + 証明のアイデア
+- トークの内容: 結果の説明 + 誤り訂正符号入門 + 証明のアイデア
+
+</v-clicks>
 
 ---
 layout: top-title
@@ -75,7 +80,7 @@ color: amber-light
 
 </div>
 
-行列積の計算量を$O(n^\omega)$とする. $\omega$の値は35年間で$0.0046$しか改善していない.
+行列積の計算量を$O(n^\omega)$とする. <v-click>$\omega$の値は35年間で$0.0046$しか改善していない.</v-click>
 
 <div style="display: flex; gap: 1em; font-size: 0.7em; border: 1px solid #ccc; padding: 0.5em; border-radius: 5px;">
 <div>
@@ -190,6 +195,7 @@ color: amber-light
 
 ::content::
 
+
 <div class="topic-box">
 
 入力として与えられた二つの行列$A,B\in\mathbb{F}^{n\times n}$に対して, 行列$C\in\mathbb{F}^{n\times n}$であって,
@@ -197,16 +203,19 @@ $AB$と $\textcolor{e65100}{\alpha}\cdot n^2$個の成分が一致するもの�
 
 </div>
 
-- 有限体のサイズを$q=|\mathbb{F}|$とする.
+<v-clicks>
+
 - $\alpha = 1$は通常の行列積
-- $\alpha = \frac{1}{q}$なら簡単 (ランダムな行列を出力すればよい)
-- 「非自明なアルゴリズム」: $\alpha \ge \frac{1}{q} + \epsilon$ を達成
+- $\alpha = \frac{1}{\abs{\F}}$なら簡単 (ランダムな行列を出力すればよい)
+- 「非自明なアルゴリズム」: $\alpha \ge \frac{1}{\abs{\F}} + \varepsilon$ を達成
 
 <div class="question">
 
 $\widetilde{O}(n^2)$時間で非自明な$\alpha$を達成できるか? ($\widetilde{O}(\cdot)$は$\polylog(n)$倍を無視したオーダー)
 
 </div>
+
+</v-clicks>
 
 ---
 layout: top-title
@@ -220,17 +229,22 @@ color: amber-light
 ::content::
 
 - 高速行列積の多くのアルゴリズムは非実用的
-  - 定数倍が非常に大きい
+  - 定数倍が非常に大きい ($n>10^{155}$じゃないとStrassenより早くならない <a href="https://epubs.siam.org/doi/10.1137/1.9781611978322.61" class="cite-reference">\[Alman, Yu, 2025\]</a>)
+
+<v-clicks>
+
 - 物理系を利用した(実用性を意識した)行列積アルゴリズム
-  - 水流
-  - 熱力学系
-  - 光学デバイス
+  - 水流 <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITCS.2024.96" class="cite-reference">\[Valinat, 2024\]</a>
+  - 熱力学系 <a href="https://openreview.net/forum?id=6flkWTzK2H" class="cite-reference">\[Coles et al, 2023\]</a>
+  - 光学デバイス <a href = "https://www.nature.com/articles/s41377-022-00717-8" class="cite-reference">\[Zhou et al, 2022\]</a>
 
 <div class="topic-box">
 
   これらのアルゴリズムは物理系のホワイトノイズによるエラーが発生しうる (近似行列積を解く).
 
 </div>
+
+</v-clicks>
 
 ---
 layout: top-title
@@ -257,10 +271,14 @@ $$
 
 </div>
 
+<v-clicks>
+
 - **近似行列積**: 与えられた$A,B\in\mathbb{F}^{n\times n}$に対して$\agr(C,AB)\ge \alpha$を満たす行列$C$を求めよ.
 - アルゴリズム$M$は任意の$A,B\in\mathbb{F}^{n\times n}$に対して$\agr(M(A,B)),AB)\ge \alpha$を満たすとき, **一致率$\alpha$を持つ**という.
   - $\alpha$に寄与する成分は入力$A,B$毎に異なりうる
   - $\alpha=1$のとき, 全成分を正しく計算
+
+</v-clicks>
 
 ---
 layout: top-title
@@ -288,15 +306,15 @@ color: amber-light
 
 <div class="theorem">
 
-任意の$\epsilon\in(0,1]$を考える.
+任意の$\varepsilon\in(0,1]$を考える.
 任意の要素数が素数であるような有限体$\F$に対し, 以下が成り立つ:
-一致率$\alpha\ge \frac{1}{\abs{\F}}+\epsilon$を持つ$T(n)$時間アルゴリズムが存在するならば,
-一致率$1$を持つ$\widetilde{O}_{p,\epsilon}(T(n))$時間アルゴリズムが存在する.
+一致率$\alpha\ge \frac{1}{\abs{\F}}+\varepsilon$を持つ$T(n)$時間アルゴリズムが存在するならば,
+一致率$1$を持つ$\widetilde{O}_{p,\varepsilon}(T(n))$時間アルゴリズムが存在する.
 
 </div>
 
 - 体のサイズ$p=\abs{\F}$が定数のときはタイトな一致率
-- 隠された定数倍は非常に大きい: $2^{2^{\poly(p/\epsilon)}}$
+- 隠された定数倍は非常に大きい: $2^{2^{\poly(p/\varepsilon)}}$
 
 </v-clicks>
 
@@ -342,7 +360,7 @@ $$
 </div>
 
 - **平均時から最悪時への帰着**: 平均的な入力で計算できる $\Rightarrow$ 任意の入力で計算できる
-- 平均一致率が$\alpha = 1/\abs{\F}+\epsilon$の場合も同様の結果が成り立つ.
+- 平均一致率が$\alpha = 1/\abs{\F}+\varepsilon$の場合も同様の結果が成り立つ.
 
 </v-clicks>
 
@@ -394,7 +412,15 @@ color: amber-light
 
 </div>
 
-- ポイント: **誤り訂正符号**を使ってencoding/decodingを設計
+<v-click>
+
+<div class="topic-box">
+
+ポイント: **誤り訂正符号**を使ってencoding/decodingを設計
+
+</div>
+
+</v-click>
 
 ---
 layout: section
@@ -526,10 +552,9 @@ color: amber-light
 - 符号の距離が$\delta$であるとき, $\rho\le \delta/2$でなければならない
   - 特に, 訂正できるエラーの割合は$\rho \le 1/2$
 
+
 - 50\%を超えるエラーを一意復号するのは不可能
   - 復号の一意性を緩めることによって対処できるか? -> リスト復号
-
-
 
 <div style="display: flex; justify-content: center; align-items: center;">
 
@@ -542,8 +567,6 @@ color: amber-light
 半径$\rho$で一意復号可能な符号を作るには, 半径$\rho$のHammingボールを$\F^n$内に敷き詰めればよい.
 
 </figcaption>
-
-
 
 ---
 layout: top-title
@@ -592,6 +615,9 @@ color: amber-light
 ::content::
 
 - 関数 $f\colon \F^n \to \F$ を長さ$p^n$の文字列$f\in\F_2^{p^n}$と同一視する (真理値表)
+
+<v-clicks>
+
 - 関数 $f$ は, あるベクトル$c\in\F_2^n$に対し
 $$
   f(x) = c^\top x
@@ -612,6 +638,8 @@ $$
 
 - 線形関数全体は加算とスカラー倍で閉じているので, $\Had_n$は線形符号
 - $n = p^n$ (冗長性が指数的に大きい)
+
+</v-clicks>
 
 ---
 layout: top-title
@@ -681,7 +709,7 @@ $$
   f(z) = \sum_{i=0}^{n-1} c_i z^i 
 $$
 
-
+<v-clicks>
 
 <div class="definition">
 
@@ -697,6 +725,8 @@ $$
 符号化$\Enc(c)$は以下のプロセスで定まる:
 - メッセージ$c=(c_0,\dots,c_{n-1})\in\F^{n}$を多項式$c(x)=c_0 + c_1 x + \dots + c_{n-1} x^{n-1}\in\calF_{<n}$ と同一視
 - $\Enc(c):=(c(0),c(1),\dots,c(N-1)) \in \F^N$を出力
+
+</v-clicks>
 
 ---
 layout: top-title
@@ -736,6 +766,9 @@ color: amber-light
 ::content::
 
 - 二つのパラメータ$n,N$の選び方によって, レート$r$と距離$\delta$が変化する:
+
+<v-clicks>
+
 - 二つの相異なる多項式$f,g\in\calF_{<n}$に対して, $f(x)=g(x)$を満たす$x$は高々$n$個
   - 従って, $\Enc(f)$と$\Enc(g)$は高々$n$個の成分が同一
   - つまり, $\dist(f,g)\ge 1-n/N$
@@ -749,6 +782,8 @@ color: amber-light
 
 - ちなみに, どんな符号を考えても距離+レートは高々$1+1/N$となる (Singleton限界)
   - リード-ソロモン符号は漸近的にこの限界に達する数少ない符号 (MDS符号)
+
+</v-clicks>
 
 ---
 layout: top-title
@@ -965,9 +1000,49 @@ color: amber-light
 
 </div>
 
-- エクスパンダーグラフはランダム正則グラフを用いる. $A'$と$B'$は技巧的に構成する (省略)
+- エクスパンダーグラフと$A'$と$B'$は技巧的に構成する (次ページ)
 -  線形時間の「近似」リスト復号アルゴリズム <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, 2023\]</a>を使うと, 任意の$\varepsilon$に対し, 適当な$\ell$に対して$\dist(\Enc(AB), C)\le 1-\frac{1}{\abs{\F}}-\varepsilon$を満たす行列$C$が計算できれば$AB$が復元できる
 
+---
+layout: top-title
+color: amber-light
+---
+::title::
+# 行列$A',B'$の構成
+::content::
+
+<div style="display: flex; justify-content: center; align-items: center;">
+
+![行列の構成](./images/expander_construction.svg)
+
+</div>
+
+<figcaption style="text-align: center; font-size: 0.8em; color: #666;">
+
+行列$A'$は$\abs{W}\times kn$行列となる. 第$\mathbf{i}=(i_1,\dots,i_k)$行目には, $A$の第$i_1$行ベクトル, 第$i_2$行ベクトル, ... を並べる.
+<br>
+$B'$は$B$に対し, 行と列を入れ替えて同じ操作を行って構成する.
+
+</figcaption>
+
+---
+layout: top-title
+color: amber-light
+---
+::title::
+# 行列$A',B'$の構成
+::content::
+
+<div style="display: flex; justify-content: center; align-items: center;">
+
+![行列の構成](./images/lifting.svg)
+
+</div>
+
+- $A'\cdot B'$の第$(\mathbf{i},\mathbf{j})$成分は, $(AB)_{i_1,j_1} + \dots + (AB)_{i_k,j_k}$に一致する ($\mathbf{i},\mathbf{j}$は$G$上のウォーク)
+- これは, テンソル積$G^2$上のウォーク$(i_1,j_1)\to \dots \to (i_k,j_k)$に沿った和とみなせる.
+  - $G^2=(V^2,E')$は, $(i,j)$と$(i',j')$の間は, $\{i,i'\}\in E$かつ$\{j,j'\}\in E$のときに辺を張って得られる
+- すなわち, $AB$を, $G^2$上のエクスパンダーウォーク符号で符号化したものとみなせる.
 
 
 
