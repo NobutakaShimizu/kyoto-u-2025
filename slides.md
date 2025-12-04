@@ -1,5 +1,6 @@
 ---
 theme: neversink
+base: '/kyoto-u-2025/'
 layout: cover
 title: Error-Correction of Matrix Multiplication Algorithms
 info: |

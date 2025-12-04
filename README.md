@@ -1,11 +1,31 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# Kyoto U 2025 - Slidev Presentation
 
-To start the slide show:
+Slidevプロジェクトです。
 
-- `pnpm install`
-- `pnpm dev`
-- visit <http://localhost:3030>
+## 開発
 
-Edit the [slides.md](./slides.md) to see the changes.
+```bash
+npm install
+npm run dev
+```
 
-Learn more about Slidev at the [documentation](https://sli.dev/).
+## ビルド
+
+```bash
+npm run build
+```
+
+## デプロイ
+
+GitHub Actionsを使用してGitHub Pagesに自動デプロイされます。
+
+### セットアップ手順
+
+1. GitHubリポジトリのSettings > Pagesに移動
+2. Sourceを「GitHub Actions」に設定
+3. `main`または`master`ブランチにプッシュすると自動的にデプロイされます
+
+### 手動デプロイ
+
+GitHub Actionsのタブから「Deploy Slidev to GitHub Pages」ワークフローを手動実行することもできます。
+
